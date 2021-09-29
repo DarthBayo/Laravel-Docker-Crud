@@ -11,10 +11,10 @@ services:
     volumes:
       - data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD: "password"
-      - MYSQL_USER: "potencial"
-      - MYSQL_PASSWORD: "potencial"
-      - MYSQL_DATABASE: "potencial"
+      - MYSQL_ROOT_PASSWORD="password"
+      - MYSQL_USER="potencial"
+      - MYSQL_PASSWORD="potencial"
+      - MYSQL_DATABASE="potencial"
 
   admin:
     image: phpmyadmin/phpmyadmin:latest
