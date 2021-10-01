@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Developers as Dev;
+use App\Models\Developer as Dev;
 
-class Developers extends Controller
+class DeveloperController extends Controller
 {
     /**
      * Display a listing of the resource.

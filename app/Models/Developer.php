@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Developers extends Model
+class Developer extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+    use SoftDeletes;
+    
+    protected $table = 'developers';
     protected $fillable = [
         'nome',
         'sexo',
@@ -21,5 +25,5 @@ class Developers extends Model
     protected $casts = [
         'datanascimento' => 'date:d-m-Y',
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 }

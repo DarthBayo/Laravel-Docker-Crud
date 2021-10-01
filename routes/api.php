@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Developers;
+use App\Http\Controllers\DeveloperController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,6 @@ use App\Http\Controllers\Developers;
 |
 */
 
-Route::resource('developers', Developers::class, [
+Route::resource('developers', DeveloperController::class, [
     'except' => ['create', 'edit']
 ]);
