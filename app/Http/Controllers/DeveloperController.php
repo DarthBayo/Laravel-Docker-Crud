@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Developer as Dev;
+use Carbon\Carbon;
 
 class DeveloperController extends Controller
 {
@@ -29,9 +30,10 @@ class DeveloperController extends Controller
         $data = $request->post();
         $status = 200;
 
+        $data['idade'] = Carbon::now()->diffInYears(Carbon::parse($data['datanascimento']));
         $dev = Dev::create([
             'nome' => $data['nome'],
-            'sexo' => $data['sexo'],
+            'sexo' => $data['sexo'][0],
             'idade' => $data['idade'],
             'hobby' => $data['hobby'],
             'datanascimento' => $data['datanascimento']
