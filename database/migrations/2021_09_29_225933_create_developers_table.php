@@ -16,7 +16,7 @@ class CreateDevelopersTable extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 50);
-            $table->char('sexo');
+            $table->char('sexo', 1);
             $table->integer('idade');
             $table->string('hobby', 100);
             $table->dateTime('datanascimento');
