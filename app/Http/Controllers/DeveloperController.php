@@ -73,9 +73,10 @@ class DeveloperController extends Controller
 
         $dev = Dev::find($id);
 
+        $data['idade'] = Carbon::now()->diffInYears(Carbon::parse($data['datanascimento']));
         if (!empty($dev)) {
             $dev->nome = $data['nome'];
-            $dev->sexo = $data['sexo'];
+            $dev->sexo = $data['sexo'][0];
             $dev->idade = $data['idade'];
             $dev->hobby = $data['hobby'];
             $dev->datanascimento = $data['datanascimento'];
