@@ -23,7 +23,7 @@ class Developer extends Model
         'id'
     ];
     protected $casts = [
-        'datanascimento' => 'date:d-m-Y',
+        'datanascimento' => 'date:Y-m-d',
     ];
     public $timestamps = true;
 }
