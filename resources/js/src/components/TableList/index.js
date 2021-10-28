@@ -33,7 +33,7 @@ export default ({ devs, handleUpdateData }) => (
                         <td>{ dev.sexo }</td>
                         <td>{ dev.idade }</td>
                         <td>{ dev.hobby }</td>
-                        <td>{ dev.datanascimento }</td>
+                        <td>{ new Date(dev.datanascimento).toLocaleDateString('pt-br', { timeZone: 'UTC' }) }</td>
                         <td>
                             <Button
                                 title={'Editar'}
