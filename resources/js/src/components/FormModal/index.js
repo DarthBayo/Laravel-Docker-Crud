@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate }) => {
+export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate, handleClearUpdate }) => {
     const [ dev, setDev ] = useState({ nome: '', sexo: '', hobby: '', datanascimento: '' })
 
     /** Alterar o state com base na chave informada */
@@ -27,7 +27,7 @@ export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate }) =>
             const data = {
                 url: dev?.id ? `/api/developers/${dev?.id}` : '/api/developers',
                 method: dev?.id ? 'put' : 'post',
-                message: dev?.id ? 'Cadastro realizado com sucesso!' : 'Alteração realizada com sucesso!'
+                message: dev?.id ? 'Alteração realizada com sucesso!' : 'Cadastro realizado com sucesso!'
             }
 
             await fetch(data.url, {
@@ -52,6 +52,13 @@ export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate }) =>
         }
     }
 
+    /** Ao fechar o modal, é feito a limpeza do state */
+    const handleClose = () => {
+        setDev({ nome: '', sexo: '', hobby: '', datanascimento: '' })
+        handleClearUpdate()
+        toggleVisibility()
+    }
+
     /** Ajusta os dados do state caso venha para edição */
     useEffect(() => {
         setDev(devToUpdate)
@@ -61,9 +68,17 @@ export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate }) =>
         <Modal
             size={'lg'}
             show={isVisible}
-            onHide={toggleVisibility}
+            onHide={handleClose}
         >
-            <Modal.Header closeButton>
+            <Modal.Header
+                className={'d-flex justify-content-end'}
+            >
+                <Button
+                    variant={'danger'}
+                    onClick={handleClose}
+                >
+                    <i className={'bi bi-x-lg'}></i>
+                </Button>
             </Modal.Header>
 
             <Modal.Body>

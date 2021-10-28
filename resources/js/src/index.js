@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import FormModal from './components/FormModal'
-import Table from './components/Table'
+import TableList from './components/TableList'
 
 const App = () =>  {
     const [ devs, setDevs ] = useState([])
@@ -23,6 +23,9 @@ const App = () =>  {
         setDevToUpdate(dev)
         toggleVisibility()
     }
+
+    /** Limpar dados para atualizar */
+    const handleClearUpdate = () => setDevToUpdate([])
 
     /** Faz a request dos devs */
     const requestAllDevs = async () => {
@@ -64,12 +67,13 @@ const App = () =>  {
                             toggleVisibility={toggleVisibility}
                             requestAllDevs={requestAllDevs}
                             devToUpdate={devToUpdate}
+                            handleClearUpdate={handleClearUpdate}
                         />
                     </article>
                 </section>
 
                 <section className={'w-100 border border-1 rounded overflow-auto'}>
-                    <Table
+                    <TableList
                         devs={devs}
                         handleUpdateData={handleUpdateData}
                     />
