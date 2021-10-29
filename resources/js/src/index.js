@@ -12,6 +12,7 @@ import TableList from './components/TableList'
 
 const App = () =>  {
     const [ devs, setDevs ] = useState([])
+    const [ search, setSearch ] = useState('')
     const [ isVisible, setIsVisible ] = useState(false)
     const [ devToUpdate, setDevToUpdate ] = useState([])
 
@@ -75,6 +76,7 @@ const App = () =>  {
                 <section className={'w-100 border border-1 rounded overflow-auto'}>
                     <TableList
                         devs={devs}
+                        requestAllDevs={requestAllDevs}
                         handleUpdateData={handleUpdateData}
                     />
                 </section>

@@ -27,8 +27,13 @@ class DeveloperController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->post();
-        $status = 200;
+        $data = $request->all();
+        $status = 404;
+
+        foreach($data as $key => $value) {
+            if (empty($value))
+                return response()->json([ 'message' => $key.' cannot be empty' ], $status);
+        }
 
         $data['idade'] = Carbon::now()->diffInYears(Carbon::parse($data['datanascimento']));
         $dev = Dev::create([
@@ -38,9 +43,9 @@ class DeveloperController extends Controller
             'hobby' => $data['hobby'],
             'datanascimento' => $data['datanascimento']
         ]);
-        empty($dev) && $status = 404;
+        !empty($dev) && $status = 200;
 
-        return response()->json($dev, $status);
+        return response()->json([], $status);
     }
 
     /**
@@ -68,8 +73,13 @@ class DeveloperController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->post();
-        $status = 200;
+        $data = $request->all();
+        $status = 400;
+
+        foreach($data as $key => $value) {
+            if (empty($value))
+                return response()->json([ 'message' => $key.' cannot be empty' ], $status);
+        }
 
         $dev = Dev::find($id);
 
@@ -81,11 +91,11 @@ class DeveloperController extends Controller
             $dev->hobby = $data['hobby'];
             $dev->datanascimento = $data['datanascimento'];
             $dev->save();
-        }
-        else
-            $status = 400;
 
-        return response()->json($dev, $status);
+            $status = 200;
+        }
+
+        return response()->json([], $status);
     }
 
     /**

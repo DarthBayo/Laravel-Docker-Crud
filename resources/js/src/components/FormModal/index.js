@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
+import { settings } from './../../utils/settings'
+
 export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate, handleClearUpdate }) => {
     const [ dev, setDev ] = useState({ nome: '', sexo: '', hobby: '', datanascimento: '' })
 
@@ -25,7 +27,7 @@ export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate, hand
         else {
             /** Altera caso já tenha cadastro */
             const data = {
-                url: dev?.id ? `/api/developers/${dev?.id}` : '/api/developers',
+                url: dev?.id ? `${settings.api}/${dev?.id}` : settings.api,
                 method: dev?.id ? 'put' : 'post',
                 message: dev?.id ? 'Alteração realizada com sucesso!' : 'Cadastro realizado com sucesso!'
             }
@@ -61,7 +63,13 @@ export default ({ isVisible, toggleVisibility, requestAllDevs, devToUpdate, hand
 
     /** Ajusta os dados do state caso venha para edição */
     useEffect(() => {
-        setDev(devToUpdate)
+        setDev({
+            id: devToUpdate.id,
+            nome: devToUpdate.nome,
+            sexo: devToUpdate.sexo,
+            hobby: devToUpdate.hobby,
+            datanascimento: devToUpdate.datanascimento
+        })
     }, [devToUpdate])
 
     return (
